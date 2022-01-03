@@ -21,6 +21,7 @@ app.get('/conceito', (req, res) => {
             })
             last_page = pages[pages.length-2]
         })
+
         .then(response => {
             for(i=1;i<=last_page;i++){
                 promises.push(
@@ -35,6 +36,7 @@ app.get('/conceito', (req, res) => {
                             const neighbourhood = $(this).find('.innerInfo').last().text().trim()
                             const price = $(this).find('.imobPrice').text().trim()
                             const link = $(this).find('a').attr('href').trim()
+                            
                             imoveis.push({
                                 title
                                 , address
@@ -43,10 +45,12 @@ app.get('/conceito', (req, res) => {
                                 , price
                                 , link
                             })
+
                         })
                     })               
                 )
             }
+
             Promise.all(promises)
                 .then((ok) => {
                     console.log('ok')
@@ -54,8 +58,6 @@ app.get('/conceito', (req, res) => {
                     res.json(imoveis)
                 })
         })
-    
-    
 })
 
 
