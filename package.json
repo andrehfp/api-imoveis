@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "API que retorna os imóveis para locação em PG de diversas imobiliárias",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andrehfp/api-imoveis.git"
