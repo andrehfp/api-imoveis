@@ -57,8 +57,7 @@ app.get('/conceito', (req, res) => {
         })
 })
 
-
-app.get('/casatop', (req, res) => {
+app.get('/desafio', (req, res) => {
     let imoveis = []
     let promises = []
     let url = 'https://imobiliariacasatop.com.br/resultado?operation=2&page=1'
@@ -70,6 +69,64 @@ app.get('/casatop', (req, res) => {
 
             let pages = $('.paginacao > span').text().trim()
             last_page = pages.split(" ")[1];
+
+
+        })
+        .then(response => {
+            for (i=1;i<=last_page;i++){
+                promises.push(
+                    axios.get('https://imobiliariacasatop.com.br/resultado?operation=2&page='+i)
+                    .then(response => {
+
+                        const html = response.data
+                        const $ = cheerio.load(html)
+
+                        $('.imobthumbs > div').each(function() {
+
+                            let title = $(this).find('.title').text().trim()
+                            let type = $(this).find('.type').text().trim()
+                            let price = $(this).find('.price').text().trim()
+                            let link = $(this).find('a').attr('href').trim()
+
+                            price = price.toString().split('\t')
+                            price = price[price.length-1]
+
+                            // Achar uma forma de pegar endereço e bairro de cada imóvel
+
+                            imoveis.push({
+                                title
+                                //                             , address
+                                , type
+                                //                             , neighbourhood
+                                , price
+                                , link
+                            })
+
+                        })
+                    })
+                )
+            }
+            Promise.all(promises)
+                .then((ok) => {
+                    console.log('ok')
+                    console.log(imoveis.length)
+                    res.json(imoveis)
+                })
+        })
+})
+
+app.get('/casatop', (req, res) => {
+    let imoveis = []
+    let promises = []
+    let url = 'https://imobiliariacasatop.com.br/resultado?operation=2&page=1'
+
+    axios.get(url)
+        .then(response => {
+            const html = response.data
+            const $ = cheerio.load(html)
+
+            let pages = $('.paginacao').text().trim()
+            last_page = pages.split(" ")[2];
 
 
         })
