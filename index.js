@@ -118,7 +118,7 @@ app.get('/casatop', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.json('Welcome to my real estate API')
+    res.json('API de imóveis para locação em PG')
 })
 
 app.listen(PORT, () =>  console.log(`server running on PORT ${PORT}`))
