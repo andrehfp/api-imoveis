@@ -18,7 +18,9 @@
   "homepage": "https://github.com/andrehfp/api-imoveis#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
     "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "firebase": "^9.6.1",
     "nodemon": "^2.0.15"

@@ -1,13 +1,13 @@
-const PORT = 8000
 const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
+const config = require('./config')
 
 const app = express()
+
 app.use(express.json())
 
 app.get('/conceito', (req, res) => {
-
     let pages = []
     let imoveis = []
     let promises = []
@@ -121,4 +121,4 @@ app.get('/', (req, res) => {
     res.json('API de imóveis para locação em PG')
 })
 
-app.listen(PORT, () =>  console.log(`server running on PORT ${PORT}`))
+app.listen(config.port, () =>  console.log(`server running on PORT ${config.port}`))
