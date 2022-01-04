@@ -1,18 +1,17 @@
 const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
-const cors = require('cors')
+// const cors = require('cors')
 
 const config = require('./config')
 const firebase = require('./db')
 const firestore = firebase.firestore()
 
 const app = express()
-app.use(cors())
+// app.use(cors())
+// app.use(express.json())
 
-app.use(express.json())
-
-app.get('/conceito', (req, res) => {
+app.get('/conceito', (req,res) => {
     let pages = []
     let imoveis = []
     let promises = []
@@ -53,19 +52,15 @@ app.get('/conceito', (req, res) => {
                     })               
                 )
             }
-
             Promise.all(promises)
                 .then((ok) => {
                     var batch = firestore.batch()
-                    console.log('ok')
-                    // aqui salvar firebase
                     imoveis.forEach(imovel => {
                         var imovRef = firestore.collection('imoveis').doc()
                         batch.set(imovRef,imovel)
                     })
                     batch.commit()
                     console.log(imoveis.length)
-
                     res.json(imoveis)
                 })
         })
@@ -131,7 +126,10 @@ app.get('/casatop', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.json('API de imóveis para locação em PG')
+    res.json('API para locação de imóveis em Ponta Grossa')
 })
 
 app.listen(config.port, () =>  console.log(`server running on PORT ${config.port}`))
+
+
+
