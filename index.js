@@ -1,9 +1,14 @@
 const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
+const cors = require('cors')
+
 const config = require('./config')
+const firebase = require('./db')
+const firestore = firebase.firestore()
 
 const app = express()
+app.use(cors())
 
 app.use(express.json())
 
@@ -51,8 +56,16 @@ app.get('/conceito', (req, res) => {
 
             Promise.all(promises)
                 .then((ok) => {
+                    var batch = firestore.batch()
                     console.log('ok')
+                    // aqui salvar firebase
+                    imoveis.forEach(imovel => {
+                        var imovRef = firestore.collection('imoveis').doc()
+                        batch.set(imovRef,imovel)
+                    })
+                    batch.commit()
                     console.log(imoveis.length)
+
                     res.json(imoveis)
                 })
         })
