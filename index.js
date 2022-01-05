@@ -2,13 +2,13 @@ const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
 
-const config = require('./config')
-const firebase = require('./db')
-const firestore = firebase.firestore()
+//const config = require('./config')
+//const firebase = require('./db')
+//const firestore = firebase.firestore()
 
 const app = express()
 
-const PORT = process.env.port || config.port
+const PORT = process.env.port || 8000
 
 app.get('/conceito', (req,res) => {
     let pages = []
