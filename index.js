@@ -8,6 +8,8 @@ const firestore = firebase.firestore()
 
 const app = express()
 
+const PORT = process.env.port || config.port
+
 app.get('/conceito', (req,res) => {
     let pages = []
     let imoveis = []
@@ -124,4 +126,4 @@ app.get('/', (req, res) => {
     res.json('API para locação de imóveis em Ponta Grossa')
 })
 
-app.listen(config.port, () =>  console.log(`server running on PORT ${config.port}`))
+app.listen(PORT, () =>  console.log(`server running on PORT ${PORT}`))
