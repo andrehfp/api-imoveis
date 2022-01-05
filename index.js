@@ -125,6 +125,3 @@ app.get('/', (req, res) => {
 })
 
 app.listen(config.port, () =>  console.log(`server running on PORT ${config.port}`))
-
-
-
