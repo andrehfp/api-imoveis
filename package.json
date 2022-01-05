@@ -1,0 +1,30 @@
+{
+  "name": "api-imoveis",
+  "version": "1.0.0",
+  "description": "API que retorna os imóveis para locação em PG de diversas imobiliárias",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrehfp/api-imoveis.git"
+  },
+  "author": "andreprado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrehfp/api-imoveis/issues"
+  },
+  "homepage": "https://github.com/andrehfp/api-imoveis#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^10.0.1",
+    "nodemon": "^2.0.15"
+  }
+}
