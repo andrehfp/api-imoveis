@@ -1,15 +1,12 @@
 const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
-// const cors = require('cors')
 
 const config = require('./config')
 const firebase = require('./db')
 const firestore = firebase.firestore()
 
 const app = express()
-// app.use(cors())
-// app.use(express.json())
 
 app.get('/conceito', (req,res) => {
     let pages = []
@@ -54,12 +51,12 @@ app.get('/conceito', (req,res) => {
             }
             Promise.all(promises)
                 .then((ok) => {
-                    var batch = firestore.batch()
-                    imoveis.forEach(imovel => {
-                        var imovRef = firestore.collection('imoveis').doc()
-                        batch.set(imovRef,imovel)
-                    })
-                    batch.commit()
+                    // var batch = firestore.batch()
+                    // imoveis.forEach(imovel => {
+                    //     var imovRef = firestore.collection('imoveis').doc()
+                    //     batch.set(imovRef,imovel)
+                    // })
+                    // batch.commit()
                     console.log(imoveis.length)
                     res.json(imoveis)
                 })
@@ -87,12 +84,10 @@ app.get('/casatop', (req, res) => {
                 promises.push(
                     axios.get('https://imobiliariacasatop.com.br/resultado?operation=2&page='+i)
                     .then(response => {
-
                         const html = response.data
                         const $ = cheerio.load(html)
 
                         $('.imobthumbs > div').each(function() {
-
                             let title = $(this).find('.title').text().trim()
                             let type = $(this).find('.type').text().trim()
                             let price = $(this).find('.price').text().trim()
