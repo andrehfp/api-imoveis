@@ -8,7 +8,7 @@ const cheerio = require ('cheerio')
 
 const app = express()
 
-const PORT = process.env.port || 8000
+const PORT = process.env.PORT || 8000
 
 app.get('/conceito', (req,res) => {
     let pages = []
