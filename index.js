@@ -41,8 +41,7 @@ app.get('/conceito', (req,res) => {
                             const link = $(this).find('a').attr('href').trim()
                             const imob = 'conceitoimoveispg'
                             const operation = 'locacao'
-                            const id = imob+operation+title
-
+                            const id = imob+operation+title+link
                             const md5Hasher = crypto.createHmac("md5", imob)
                             const uid = md5Hasher.update(id).digest("hex")
 
@@ -56,7 +55,6 @@ app.get('/conceito', (req,res) => {
                                 , price
                                 , link
                                 , imob
-
                             })
                         })
                     })               
@@ -64,12 +62,6 @@ app.get('/conceito', (req,res) => {
             }
             Promise.all(promises)
                 .then((ok) => {
-                    // var batch = firestore.batch()
-                    // imoveis.forEach(imovel => {
-                    //     var imovRef = firestore.collection('imoveis').doc()
-                    //     batch.set(imovRef,imovel)
-                    // })
-                    // batch.commit()
                     console.log(imoveis.length)
                     res.json(imoveis)
                 })
