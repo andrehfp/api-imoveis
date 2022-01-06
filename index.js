@@ -1,6 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
+const crypto = require('crypto')
 
 //const config = require('./config')
 //const firebase = require('./db')
@@ -38,14 +39,24 @@ app.get('/conceito', (req,res) => {
                             const neighbourhood = $(this).find('.innerInfo').last().text().trim()
                             const price = $(this).find('.imobPrice').text().trim()
                             const link = $(this).find('a').attr('href').trim()
+                            const imob = 'conceitoimoveispg'
+                            const operation = 'locacao'
+                            const id = imob+operation+title
+
+                            const md5Hasher = crypto.createHmac("md5", imob)
+                            const uid = md5Hasher.update(id).digest("hex")
+
 
                             imoveis.push({
-                                title
+                                uid
+                                , title
                                 , address
                                 , type
                                 , neighbourhood
                                 , price
                                 , link
+                                , imob
+
                             })
                         })
                     })               
