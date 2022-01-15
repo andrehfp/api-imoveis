@@ -2,9 +2,10 @@ const express = require('express')
 const axios = require('axios')
 const cheerio = require ('cheerio')
 const crypto = require('crypto')
+const cors = require('cors')
 
 const app = express()
-
+app.use(cors())
 const PORT = process.env.PORT || 8000
 
 app.get('/conceito', (req,res) => {
